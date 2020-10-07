@@ -1,3 +1,5 @@
+#TODO: Тут всё падает, если попытаться создать словарь str с кастомной длиной. 
+
 import random
 
 class Generator:
@@ -7,6 +9,7 @@ class Generator:
         # оставил параметры, чтоб лишний раз не менять синтаксис
         'bool': lambda data_values_min, data_values_max: random.randint(0, 1),
         # string будет длины от dvm до dvM. Диапазон в chr - это латиница + часто используемые символы
+        
         'string': lambda data_values_min=20, data_values_max=50: ''.join([chr(random.randint(32, 126)) for x in range(random.randint(data_values_min, data_values_max))]),
     }
 
@@ -36,7 +39,6 @@ def test():
     z = y.generate(50)
     c = Generator(Generator.generate_dict)
     t = c.generate(20)
-    print(z)
     print(t)
 
 if __name__=="__main__":
