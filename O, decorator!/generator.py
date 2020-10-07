@@ -24,6 +24,9 @@ class Generator:
         key = Generator.type_unit_gen[key_vartype]
         val = Generator.type_unit_gen[val_vartype]
         return {key(kdvm,kdvM):val(vdvm,vdvM) for k in range(dict_length)}
+    
+    def generate_string(string_length):
+        return Generator.type_unit_gen['string'](string_length,string_length)
 
     def __init__(self, gen_function= generate_list):
             self.generate = gen_function
@@ -33,13 +36,21 @@ class Generator:
 
 def test():
     print(Generator.generate_list(5,vartype='string'))
-    x = Generator(Generator.generate_list)
-    print(x.generate(50))
-    y = Generator(lambda length: list(range(length)))
-    z = y.generate(50)
-    c = Generator(Generator.generate_dict)
-    t = c.generate(20)
+    list_generated = Generator(Generator.generate_list)
+    print(list_generated.generate(50))
+    
+    custom_func_generated = Generator(lambda length: list(range(length)))
+    z = custom_func_generated.generate(50)
+    print(z)
+
+    dict_generated = Generator(Generator.generate_dict)
+    t = dict_generated.generate(20)
     print(t)
 
+    string_generated = Generator(Generator.generate_string)
+    q = string_generated.generate(250)
+    print(q)
+    print(len(q))
+    
 if __name__=="__main__":
     test()
